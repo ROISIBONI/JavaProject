@@ -20,4 +20,9 @@ public interface Model {
 	 * Close server.
 	 */
 	public void closeServer();
+	
+	public void saveProperties ();
+	
+	public Properties getProperties();
+	public void setProperties(Properties properties);
 }

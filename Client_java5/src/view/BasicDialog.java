@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package view;
 
 import org.eclipse.swt.SWT;

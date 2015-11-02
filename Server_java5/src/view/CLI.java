@@ -27,6 +27,7 @@ public class CLI {
 	
 	/** The run thread. */
 	boolean runThread;
+	
 
 	/**
 	 * Instantiates a new cli.

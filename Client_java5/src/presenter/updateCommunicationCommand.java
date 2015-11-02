@@ -7,19 +7,19 @@ import model.Model;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class loadMazeCommand.
+ * The Class updateCommunicationCommand.
  */
-public class loadMazeCommand implements Command {
+public class updateCommunicationCommand implements Command {
 
 	/** The model. */
 	private Model model;
 
 	/**
-	 * Instantiates a new load maze command.
+	 * Instantiates a new update communication command.
 	 *
 	 * @param model the model
 	 */
-	public loadMazeCommand(Model model) {
+	public updateCommunicationCommand(Model model) {
 		this.model = model;
 	}
 
@@ -28,7 +28,7 @@ public class loadMazeCommand implements Command {
 	 */
 	@Override
 	public void doCommand(DataObject obj) {
-		model.loadMaze(obj);
+		model.updateCommunication(obj);
 	}
 
 }

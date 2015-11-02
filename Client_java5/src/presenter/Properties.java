@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package presenter;
 
 import java.io.Serializable;
@@ -23,6 +26,12 @@ public class Properties implements Serializable {
 	
 	/** The size z. */
 	int sizeZ;
+	
+	/** The port. */
+	int port;
+	
+	/** The ip. */
+	String ip;
 
 	/**
 	 * Instantiates a new properties.
@@ -33,6 +42,8 @@ public class Properties implements Serializable {
 		this.sizeX = 1;
 		this.sizeY = 8;
 		this.sizeZ = 8;
+		this.port = 5555;
+		this.ip = "127.0.0.1";
 	}
 	
 	/**
@@ -46,6 +57,8 @@ public class Properties implements Serializable {
 		this.sizeX = p.sizeX;
 		this.sizeY = p.sizeY;
 		this.sizeZ = p.sizeZ;
+		this.port = p.port;
+		this.ip = p.ip;
 	}
 
 	/**
@@ -136,6 +149,42 @@ public class Properties implements Serializable {
 	 */
 	public void setSizeZ(int sizeZ) {
 		this.sizeZ = sizeZ;
+	}
+
+	/**
+	 * Gets the port.
+	 *
+	 * @return the port
+	 */
+	public int getPort() {
+		return port;
+	}
+
+	/**
+	 * Sets the port.
+	 *
+	 * @param port the new port
+	 */
+	public void setPort(int port) {
+		this.port = port;
+	}
+
+	/**
+	 * Gets the ip.
+	 *
+	 * @return the ip
+	 */
+	public String getIp() {
+		return ip;
+	}
+
+	/**
+	 * Sets the ip.
+	 *
+	 * @param ip the new ip
+	 */
+	public void setIp(String ip) {
+		this.ip = ip;
 	}
 
 }

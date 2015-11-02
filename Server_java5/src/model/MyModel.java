@@ -1,6 +1,9 @@
 package model;
 
+import java.io.FileNotFoundException;
+
 import controller.Controller;
+
 
 // TODO: Auto-generated Javadoc
 /**
@@ -13,6 +16,8 @@ public class MyModel implements Model {
 	
 	/** The my server. */
 	MyServer myServer;
+	
+	Properties properties;
 
 	/**
 	 * Instantiates a new my model.
@@ -22,9 +27,20 @@ public class MyModel implements Model {
 	 * @param numOfClients the num of clients
 	 * @param controller the controller
 	 */
-	public MyModel(int port, ClinetHandler clinetHandler, int numOfClients, Controller controller) {
-		myServer = new MyServer(port, clinetHandler, numOfClients);
+	public MyModel(ClinetHandler clinetHandler, Controller controller) {
+
 		this.controller = controller;
+		
+		try {
+			ManagerProperties managerProperties = new ManagerProperties();
+			properties = managerProperties.loadFile("Server Properties");
+			System.out.println(properties.getPort());
+		} catch (FileNotFoundException e) {
+			properties = new Properties();
+		}
+		
+		myServer = new MyServer(properties, clinetHandler);
+			
 	}
 
 	/* (non-Javadoc)
@@ -83,6 +99,26 @@ public class MyModel implements Model {
 			controller.display("The Server was closed in an unsafe mode");
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void saveProperties() {
+		try {
+			ManagerProperties manager = new ManagerProperties();
+			manager.saveFile("Server Properties", properties);
+		} catch (Exception e) {
+			e.printStackTrace();
+			controller.display("problem - saving failed");
+		}
+	}
+
+	public Properties getProperties() {
+		return properties;
+	}
+
+	public void setProperties(Properties properties) {
+		this.properties = properties;
+		myServer.setProperties(properties);
 	}
 
 }

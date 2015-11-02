@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package view;
 
 import org.eclipse.swt.SWT;
@@ -92,15 +95,35 @@ public class MyViewGUI extends BasicWindow implements View {
 		MenuItem fileMenu = new MenuItem(menu, SWT.CASCADE);
 		fileMenu.setText("file");
 		
-		MenuItem GameMenu = new MenuItem(menu, SWT.CASCADE);
-		GameMenu.setText("game");
+		MenuItem gameMenu = new MenuItem(menu, SWT.CASCADE);
+		gameMenu.setText("game");
+		
+		MenuItem communicationMenu = new MenuItem(menu, SWT.CASCADE);
+		communicationMenu.setText("communication");
 
 		Menu fileSubMenu = new Menu(fileMenu);
 		fileMenu.setMenu(fileSubMenu);
 		
-		Menu GameSubMenu = new Menu(GameMenu);
-		GameMenu.setMenu(GameSubMenu);
+		Menu gameSubMenu = new Menu(gameMenu);
+		gameMenu.setMenu(gameSubMenu);
+		
+		Menu communicationSubMenu = new Menu(communicationMenu);
+		communicationMenu.setMenu(communicationSubMenu);
 			
+		// connection - Communication sub menu
+		MenuItem connection = new MenuItem(communicationSubMenu, SWT.NONE);
+		connection.setText("connection");
+		
+		connection.addSelectionListener(new SelectionAdapter() {
+			
+			public void widgetSelected(SelectionEvent e) {
+				ConnectionDialog connectionDialog = new ConnectionDialog(shell, "Connection");
+				connectionDialog.setProperties(gameCommand.getProperties());
+				connectionDialog.open("pic/DialogWindow.png");
+			}
+			
+		});
+		
 		// open properties - file sub menu
 		MenuItem openProperties = new MenuItem(fileSubMenu, SWT.NONE);
 		openProperties.setText("Open properties");
@@ -158,7 +181,7 @@ public class MyViewGUI extends BasicWindow implements View {
 
 		
 		// start new game - game sub menu
-		MenuItem startGameMenu = new MenuItem(GameSubMenu, SWT.PUSH);
+		MenuItem startGameMenu = new MenuItem(gameSubMenu, SWT.PUSH);
 		startGameMenu.setText("Start new game");
 		
 		// load game - game sub menu
@@ -191,6 +214,7 @@ public class MyViewGUI extends BasicWindow implements View {
 	 */
 	@Override
 	public void start() {
+		gameCommand.updateCommunicationData();
 		run();
 	}
 

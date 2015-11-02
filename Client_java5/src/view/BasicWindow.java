@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package view;
 
 import java.util.Observable;

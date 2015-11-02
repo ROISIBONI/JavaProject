@@ -1,6 +1,7 @@
 package controller;
 
 import model.Model;
+import model.Properties;
 import view.View;
 
 // TODO: Auto-generated Javadoc
@@ -36,4 +37,6 @@ public interface Controller {
 	 * @param view the new view
 	 */
 	public void setView(View view);
+	
+	public Properties getProperties();
 }

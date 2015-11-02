@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package model;
 
 import io.MyCompressorOutputStream;
@@ -37,10 +40,10 @@ public class MyModel extends Observable implements Model {
 	private static final int SOLVE_GAME			= 2;
 	
 	/** The Constant PORT. */
-	public static final int PORT 				= 5555;
+	public static int PORT 						= 5555;
 	
 	/** The Constant IP. */
-	public static final String IP				= "127.0.0.1";
+	public static String IP						= "127.0.0.1";
 
 	
 	/** The maze3d. */
@@ -572,5 +575,33 @@ public class MyModel extends Observable implements Model {
 	public void notifyObservers(Object arg) {
 		setChanged();
 		super.notifyObservers(arg);
+	}
+
+	/* (non-Javadoc)
+	 * @see model.Model#updateCommunication(presenter.DataObject)
+	 */
+	@Override
+	public void updateCommunication(DataObject obj) {
+		
+		if (obj.getData() instanceof String []) {
+			String string = (String) obj.getData();
+			String [] arr = string.split(",");
+			if (arr.length==2) {
+				IP = arr[0];
+				PORT = Integer.parseInt(arr[1]);
+			}
+			else {
+				obj.setData("invalid number of parameters");
+				obj.setSerialNumber(ERORR);
+				notifyObservers(obj);
+			}
+			
+			
+		}
+		else {
+			obj.setSerialNumber(ERORR);
+			obj.setData("invalid parameters type");
+		}
+		
 	}
 }

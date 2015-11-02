@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package presenter;
 
 import view.View;
@@ -31,7 +34,7 @@ public class displayAllCommand implements Command {
 			obj.setSerialNumber(-1);
 			view.display(obj);
 		}
-		String[] arr = new String[12+2];
+		String[] arr = new String[13+2];
 		
 		arr[0] = "------------------------Commands------------------------";
 		arr[1] = "dir,path";
@@ -45,8 +48,9 @@ public class displayAllCommand implements Command {
 		arr[9] = "solve,maze name,algorithm solution heuristic*,current position*";
 		arr[10] = "display solution,maze name";
 		arr[11] = "display Commands";
-		arr[12] = "exit";
-		arr[13] = "------------------------------------------------------";
+		arr[12] = "update communication, ip, port";
+		arr[13] = "exit";
+		arr[14] = "------------------------------------------------------";
 
 		obj.setData(arr);
 		view.display(obj);

@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package view;
 
 import java.util.Observable;
@@ -83,6 +86,11 @@ public interface CommandGameGUI {
 	 * @return the properties
 	 */
 	public Properties getProperties ();
+	
+	/**
+	 * Update communication data.
+	 */
+	public void updateCommunicationData ();
 	
 	/**
 	 * Sets the observable.

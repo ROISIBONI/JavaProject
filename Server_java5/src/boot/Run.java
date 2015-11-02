@@ -23,7 +23,7 @@ public class Run {
 	 */
 	public static void main(String[] args) {
 		Controller controller = new MyController();
-		Model model = new MyModel(5555, new MyClientHandler(), 3,controller);
+		Model model = new MyModel(new MyClientHandler(),controller);
 		View view = new MyViewCLI(new InputStreamReader(System.in),new OutputStreamWriter(System.out), controller);
 		controller.setModel(model);
 		controller.setView(view);

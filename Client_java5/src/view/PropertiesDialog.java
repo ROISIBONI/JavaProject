@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package view;
 
 import org.eclipse.swt.SWT;
@@ -79,7 +82,7 @@ public class PropertiesDialog extends BasicDialog {
 	 * @param properties the new properties
 	 */
 	public void setProperties(Properties properties) {
-		this.properties = properties;
+		this.properties = new Properties(properties);
 	}
 
 	/* (non-Javadoc)

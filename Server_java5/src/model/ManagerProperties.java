@@ -1,7 +1,7 @@
 /*
  * 
  */
-package presenter;
+package model;
 
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;

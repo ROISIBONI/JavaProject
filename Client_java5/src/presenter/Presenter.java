@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package presenter;
 
 import java.util.HashMap;
@@ -46,6 +49,7 @@ public class Presenter implements Observer {
 		command.put("display solution", new displaySolutionCommand(model));
 		command.put("exit", new exitCommand(model, view));
 		command.put("display commands", new displayAllCommand(view));
+		command.put("update communication", new updateCommunicationCommand(model));
 	}
 
 	/**

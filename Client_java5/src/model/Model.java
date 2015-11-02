@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package model;
 
 import presenter.DataObject;
@@ -64,6 +67,8 @@ public interface Model {
 	 * @param obj the obj
 	 */
 	public void displaySolution(DataObject obj);
+	
+	public void updateCommunication(DataObject obj);
 
 	/**
 	 * Exit.

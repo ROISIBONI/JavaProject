@@ -15,9 +15,6 @@ import java.util.concurrent.TimeUnit;
  * The Class MyServer.
  */
 public class MyServer {
-
-	/** The port. */
-	int port;
 	
 	/** The server. */
 	ServerSocket server;
@@ -27,9 +24,6 @@ public class MyServer {
 	
 	/** The clinet handler. */
 	ClinetHandler clinetHandler;
-	
-	/** The num of clients. */
-	int numOfClients;
 	
 	/** The threadpool. */
 	ExecutorService threadpool;
@@ -43,6 +37,8 @@ public class MyServer {
 	/** The clients handled. */
 	int clientsHandled = 0;
 	
+	Properties properties;
+	
 	/**
 	 * Instantiates a new my server.
 	 *
@@ -50,15 +46,11 @@ public class MyServer {
 	 * @param clinetHandler the clinet handler
 	 * @param numOfClients the num of clients
 	 */
-	public MyServer(int port, ClinetHandler clinetHandler, int numOfClients) {
-		this.port = port;
+	public MyServer(Properties properties, ClinetHandler clinetHandler) {
+		this.properties = properties;
 		this.clinetHandler = clinetHandler;
-		this.numOfClients = numOfClients;
 		this.clients = new HashMap<String, Socket> ();
 		this.serverRunning= false;
-		if (numOfClients < 2) {
-			numOfClients=3;
-		}
 	}
 	
 	/**
@@ -106,9 +98,9 @@ public class MyServer {
 	 * @throws Exception the exception
 	 */
 	public void start() throws Exception {
-		server = new ServerSocket(port);
+		server = new ServerSocket(properties.getPort());
 		server.setSoTimeout(10 * 1000);
-		threadpool = Executors.newFixedThreadPool(numOfClients);
+		threadpool = Executors.newFixedThreadPool(properties.getNumOfClient());
 		serverRunning = true;
 
 		mainServerThread = new Thread(new Runnable() {
@@ -166,4 +158,10 @@ public class MyServer {
 			server.close();
 		}
 	}
+
+	public void setProperties(Properties properties) {
+		this.properties = properties;
+	}
+	
+	
 }

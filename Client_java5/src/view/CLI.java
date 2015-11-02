@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package view;
 
 import java.io.BufferedReader;

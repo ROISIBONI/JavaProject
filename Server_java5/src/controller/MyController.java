@@ -2,6 +2,7 @@ package controller;
 
 import java.util.HashMap;
 import model.Model;
+import model.Properties;
 import view.View;
 
 // TODO: Auto-generated Javadoc
@@ -29,6 +30,7 @@ public class MyController implements Controller {
 		command.put("online clients", new OnlineClients());
 		command.put("close server", new CloseServer());
 		command.put("exit", new Exit());
+		command.put("update communication", new updateCommunicationCommand());
 	}
 
 	/* (non-Javadoc)
@@ -62,9 +64,15 @@ public class MyController implements Controller {
 	public void command(Object obj) {
 		if (obj instanceof String) {
 			String string = (String) obj;
-			Command c = command.get(string.toLowerCase());
+			String [] param = string.split(",", 2);
+			Command c = command.get(param[0].toLowerCase());
 			if (c != null) {
-				c.doCommand();
+				if (param.length==2) {
+					c.doCommand(param[1]);
+				}
+				else {
+					c.doCommand(null);
+				}	
 			} else {
 				view.display("wrong Command");
 			}
@@ -86,18 +94,21 @@ public class MyController implements Controller {
 		 * @see controller.Command#doCommand()
 		 */
 		@Override
-		public void doCommand() {
-			String[] allCommand = new String[command.size()+2];
-			
-			allCommand[0] = "------Commands------";
-			allCommand[1] = "Display command";
-			allCommand[2] = "Open server";
-			allCommand[3] = "Online clients";
-			allCommand[4] = "Close server";
-			allCommand[5] = "Exit";
-			allCommand[6] = "--------------------";
-			
-			view.display(allCommand);
+		public void doCommand(String param) {
+			if (param == null) {
+				String[] allCommand = new String[command.size()+2];
+				
+				allCommand[0] = "------Commands------";
+				allCommand[1] = "Display command";
+				allCommand[2] = "Open server";
+				allCommand[3] = "Online clients";
+				allCommand[4] = "Close server";
+				allCommand[5] = "Update communication,port,num of clients";
+				allCommand[6] = "Exit";
+				allCommand[7] = "--------------------";
+				
+				view.display(allCommand);
+			}
 		}
 	}
 
@@ -110,8 +121,10 @@ public class MyController implements Controller {
 		 * @see controller.Command#doCommand()
 		 */
 		@Override
-		public void doCommand() {
-			model.start();
+		public void doCommand(String param) {
+			if (param == null) {
+				model.start();
+			}
 		}
 	}
 
@@ -124,8 +137,10 @@ public class MyController implements Controller {
 		 * @see controller.Command#doCommand()
 		 */
 		@Override
-		public void doCommand() {
-			model.onLineClients();
+		public void doCommand(String param) {
+			if (param == null) {
+				model.onLineClients();
+			}
 		}
 	}
 
@@ -138,8 +153,10 @@ public class MyController implements Controller {
 		 * @see controller.Command#doCommand()
 		 */
 		@Override
-		public void doCommand() {
-			model.closeServer();
+		public void doCommand(String param) {
+			if (param == null) {
+				model.closeServer();
+			}
 		}
 	}
 
@@ -152,10 +169,32 @@ public class MyController implements Controller {
 		 * @see controller.Command#doCommand()
 		 */
 		@Override
-		public void doCommand() {
-			model.closeServer();
-			view.exit();
+		public void doCommand(String param) {
+			if (param == null) {
+				model.closeServer();
+				model.saveProperties();
+				view.exit();
+			}
 		}
+	}
+	
+	public class updateCommunicationCommand implements Command {
+		
+		@Override
+		public void doCommand(String param) {
+			if (param != null) {
+				String [] port_numOfClient = param.split(",");
+				Properties p =model.getProperties();
+				p.setPort(Integer.parseInt(port_numOfClient[0]));
+				p.setNumOfClient(Integer.parseInt(port_numOfClient[1]));
+				view.display("Properties have been updated");
+			}
+		}
+	}
+
+	@Override
+	public Properties getProperties() {
+		return model.getProperties();
 	}
 
 }

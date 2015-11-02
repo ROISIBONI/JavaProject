@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package view;
 
 import java.io.FileNotFoundException;
@@ -37,6 +40,9 @@ public class CommandMazeGame implements CommandGameGUI {
 	
 	/** The Constant EXIT. */
 	public static final int EXIT 				= 4;
+	
+	/** The Constant UPDATE_IP_PORT. */
+	public static final int UPDATE_IP_PORT 		= 5;
 	
 	/** The properties. */
 	Properties properties;
@@ -142,7 +148,7 @@ public class CommandMazeGame implements CommandGameGUI {
 	 */
 	@Override
 	public Properties getProperties() {
-		return new Properties(properties);
+		return properties;
 	}
 	
 	/* (non-Javadoc)
@@ -227,6 +233,15 @@ public class CommandMazeGame implements CommandGameGUI {
 	public void exit() {
 		DataObject data=new DataObject(EXIT,"exit");
 		ob.notifyObservers(data);	
+	}
+
+	/* (non-Javadoc)
+	 * @see view.CommandGameGUI#updateCommunicationData()
+	 */
+	@Override
+	public void updateCommunicationData() {
+		DataObject data=new DataObject(UPDATE_IP_PORT,"update communication"+","+properties.getIp()+","+properties.getPort());
+		ob.notifyObservers(data);
 	}
 
 }
